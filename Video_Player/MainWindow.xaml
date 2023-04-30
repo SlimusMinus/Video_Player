@@ -1,0 +1,43 @@
+﻿<Window x:Class="Video_Player.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Video_Player"
+        mc:Ignorable="d"
+        Title="Pleer" Height="450" Width="800" FontSize="20" Background="Black" Icon="/icon.ico" Loaded="Window_Loaded" MinHeight="450" MinWidth="800">
+
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="40">
+            <Button x:Name="bt_Play" Height="auto" Click="Button_Click" Background="Black" BorderBrush="Black" Cursor="Hand" Width="50">
+                <Image Source="play.ico" Stretch="Uniform"/>
+            </Button>
+            <Button Click="BT_Stop" Background="Black" BorderBrush="Black" Cursor="Hand" Width="50">
+                <Image Source="stop.ico"/>
+            </Button>
+            <Button Click="BT_Clouse" Background="Black" BorderBrush="Black" Cursor="Hand" Width="50">
+                <Image Source="close.ico"/>
+            </Button>
+            <Label x:Name="label_time" Width="98" Foreground="White"/>
+        </StackPanel>
+        <Grid DockPanel.Dock="Bottom" Height="29">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="123"/>
+            </Grid.ColumnDefinitions>
+            <Slider Grid.Column="0" x:Name="slider_play" AutoToolTipPlacement="BottomRight" ValueChanged="slider_play_ValueChanged"/>
+            <Slider Grid.Column="1" x:Name="slider_vol" ValueChanged="Slider_ValueChanged" Maximum="100" AutoToolTipPlacement="BottomRight"/>
+        </Grid>
+        <Menu DockPanel.Dock="Top" Height="20" Foreground="BlueViolet" Background="Black" FontSize="14">
+            <MenuItem Header="File" >
+                <MenuItem Header="Open" Click="BT_Open" Background="Black">
+                    <MenuItem.Icon>
+                        <Image Source="open.ico"/>
+                    </MenuItem.Icon>
+                  
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <MediaElement Source="guf.mp4" LoadedBehavior="Manual" x:Name="Window_Player" MediaOpened="Window_Player_MediaOpened" MediaFailed="Window_Player_MediaFailed"/>
+    </DockPanel>
+</Window>
