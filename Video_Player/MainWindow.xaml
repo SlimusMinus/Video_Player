@@ -14,30 +14,48 @@
             </Button>
             <Button Click="BT_Stop" Background="Black" BorderBrush="Black" Cursor="Hand" Width="50">
                 <Image Source="stop.ico"/>
+                <Button.ToolTip>Stop</Button.ToolTip>
             </Button>
             <Button Click="BT_Clouse" Background="Black" BorderBrush="Black" Cursor="Hand" Width="50">
                 <Image Source="close.ico"/>
+                <Button.ToolTip>Close</Button.ToolTip>
             </Button>
             <Label x:Name="label_time" Width="98" Foreground="White"/>
         </StackPanel>
         <Grid DockPanel.Dock="Bottom" Height="29">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="34"/>
                 <ColumnDefinition Width="123"/>
             </Grid.ColumnDefinitions>
             <Slider Grid.Column="0" x:Name="slider_play" AutoToolTipPlacement="BottomRight" ValueChanged="slider_play_ValueChanged"/>
-            <Slider Grid.Column="1" x:Name="slider_vol" ValueChanged="Slider_ValueChanged" Maximum="100" AutoToolTipPlacement="BottomRight"/>
+            <Slider Grid.Column="2" x:Name="slider_vol" ValueChanged="Slider_ValueChanged" Maximum="100" AutoToolTipPlacement="BottomRight"/>
+            <TextBlock Grid.Column="1" Foreground="BlueViolet" VerticalAlignment="Top">
+                <Image Source="volume.ico"/>
+            </TextBlock>
         </Grid>
-        <Menu DockPanel.Dock="Top" Height="20" Foreground="BlueViolet" Background="Black" FontSize="14">
-            <MenuItem Header="File" >
-                <MenuItem Header="Open" Click="BT_Open" Background="Black">
+        <Menu DockPanel.Dock="Top" Height="20" Foreground="BlueViolet" Background="Black" FontSize="14" BorderBrush="Black">
+            <MenuItem Header="_File" >
+                <MenuItem Header="Open" Click="BT_Open" Background="Black" BorderBrush="Black">
                     <MenuItem.Icon>
                         <Image Source="open.ico"/>
                     </MenuItem.Icon>
-                  
                 </MenuItem>
+                <MenuItem Header="Open files" Background="Black" BorderBrush="Black"/>
+                <MenuItem Header="Open folder" Background="Black" BorderBrush="Black"/>
+                <Separator/>
             </MenuItem>
+            <MenuItem Header="Media" Background="Black" BorderBrush="Black"/>
+            <MenuItem Header="View" Background="Black" BorderBrush="Black"/>
+            <MenuItem Header="Tool" Background="Black" BorderBrush="Black"/>
+            <MenuItem Header="Help" Background="Black" BorderBrush="Black"/>
         </Menu>
+        <ToolBar DockPanel.Dock="Top" Background="Black">
+            <ToggleButton Click="BT_Open">
+                <Image Source="open.ico" Width="20"/>
+                <ToggleButton.ToolTip>Open</ToggleButton.ToolTip>
+            </ToggleButton>
+        </ToolBar>
         <MediaElement Source="guf.mp4" LoadedBehavior="Manual" x:Name="Window_Player" MediaOpened="Window_Player_MediaOpened" MediaFailed="Window_Player_MediaFailed"/>
     </DockPanel>
 </Window>

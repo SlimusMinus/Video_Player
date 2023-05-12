@@ -21,6 +21,9 @@ namespace Video_Player
         Image img = new Image();
         Image img2 = new Image();
         DispatcherTimer timer = new DispatcherTimer();
+        TextBlock textBlock_play;
+        TextBlock textBlock_pause;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,17 +58,19 @@ namespace Video_Player
             {
                 Window_Player.Play();
                 bt_Play.Content = img2;
+                bt_Play.ToolTip = textBlock_pause;
             }
             else if (bt_Play.Content == img2)
             {
                 Window_Player.Pause();
                 bt_Play.Content = img;
+                bt_Play.ToolTip = textBlock_play;
             }
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Window_Player.Volume = slider_vol.Value;
+            Window_Player.Volume = slider_vol.Value / 100;
         }
 
         private void Window_Player_MediaOpened(object sender, RoutedEventArgs e)
@@ -80,12 +85,19 @@ namespace Video_Player
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            img.Source = new BitmapImage(new Uri("D:\\visual studio\\Video_Player\\Video_Player\\bin\\Debug\\net6.0-windows\\play.ico"));
-            img2.Source = new BitmapImage(new Uri("D:\\visual studio\\Video_Player\\Video_Player\\bin\\Debug\\net6.0-windows\\pause.ico"));
+            img.Source = new BitmapImage(new Uri("play.ico", UriKind.Relative));
+            img2.Source = new BitmapImage(new Uri("pause.ico", UriKind.Relative));
             bt_Play.Content = img;
             Window_Player.Volume = slider_vol.Value;
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
+            textBlock_play = new TextBlock();
+            textBlock_pause = new TextBlock();
+            textBlock_play.Text = "Play";
+            textBlock_pause.Text = "Pause";
+            bt_Play.ToolTip = textBlock_play;
+
+           
         }
 
         private void slider_play_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -102,6 +114,6 @@ namespace Video_Player
             bt_Play.Content = img2;
         }
 
-
+      
     }
 }
