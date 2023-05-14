@@ -70,7 +70,9 @@ namespace Video_Player
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            ((Slider)sender).SelectionEnd = e.NewValue;
             Window_Player.Volume = slider_vol.Value / 100;
+            
         }
 
         private void Window_Player_MediaOpened(object sender, RoutedEventArgs e)
@@ -89,7 +91,7 @@ namespace Video_Player
             img2.Source = new BitmapImage(new Uri("pause.ico", UriKind.Relative));
             bt_Play.Content = img;
             Window_Player.Volume = slider_vol.Value;
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Interval = TimeSpan.FromMilliseconds(1);
             timer.Tick += Timer_Tick;
             textBlock_play = new TextBlock();
             textBlock_pause = new TextBlock();
@@ -103,6 +105,7 @@ namespace Video_Player
         private void slider_play_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Window_Player.Position = TimeSpan.FromSeconds(slider_play.Value);
+            
         }
 
         private void BT_Open(object sender, RoutedEventArgs e)
